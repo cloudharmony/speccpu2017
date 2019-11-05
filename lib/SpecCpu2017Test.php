@@ -266,7 +266,7 @@ class SpecCpu2017Test {
       foreach($this->options as $key => $val) {
         $col = $key;
         if ($col == 'benchmark') $col = 'benchmarks';
-        $results[$col] = is_array($val) ? implode(',', $val) : $val;
+        $results[$col] = is_array($val) ? implode('|', $val) : $val;
       }
       foreach(array('specint2017.csv', 'specfp2017.csv') as $csv) {
         if (file_exists($csv = sprintf('%s/%s', $this->options['output'], $csv))) {
