@@ -40,14 +40,31 @@ if ($db =& BenchmarkDb::getDb()) {
     $iteration = isset($args['iteration']) && preg_match('/([0-9]+)/', $args['iteration'], $m) ? $m[1]*1 : $i + 1;
     // save artifacts
     print_msg(sprintf('Saving results in directory %s', $dir), isset($args['verbose']), __FILE__, __LINE__);
-    foreach(array('specfp2017.csv' => 'nostore_csv', 'specfp2017.html' => 'nostore_html', 'specfp2017.pdf' => 'nostore_pdf', 'specfp2017.txt' => 'nostore_text', 
-                  'specint2017.csv' => 'nostore_csv', 'specint2017.html' => 'nostore_html', 'specint2017.pdf' => 'nostore_pdf',
-                  'collectd-rrd.zip' => 'nostore_rrd', 'specint2017.txt' => 'nostore_text') as $file => $arg) {
+    foreach(array('specrate2017_fp.csv' => 'nostore_csv', 
+                  'specrate2017_fp.html' => 'nostore_html', 
+                  'specrate2017_fp.pdf' => 'nostore_pdf', 
+                  'specrate2017_fp.txt' => 'nostore_text',
+                  'specspeed2017_fp.csv' => 'nostore_csv', 
+                  'specspeed2017_fp.html' => 'nostore_html', 
+                  'specspeed2017_fp.pdf' => 'nostore_pdf', 
+                  'specspeed2017_fp.txt' => 'nostore_text', 
+                  'specrate2017_int.csv' => 'nostore_csv', 
+                  'specrate2017_int.html' => 'nostore_html', 
+                  'specrate2017_int.pdf' => 'nostore_pdf',
+                  'specrate2017_int.txt' => 'nostore_text',
+                  'specspeed2017_int.csv' => 'nostore_csv', 
+                  'specspeed2017_int.html' => 'nostore_html', 
+                  'specspeed2017_int.pdf' => 'nostore_pdf',
+                  'specspeed2017_int.txt' => 'nostore_text',
+                  'collectd-rrd.zip' => 'nostore_rrd') as $file => $arg) {
       $file = sprintf('%s/%s', $dir, $file);
       if (!isset($args[$arg]) && file_exists($file)) {
         $pieces = explode('.', $file);
         $type = $pieces[count($pieces) - 1];
-        $col = $arg == 'nostore_rrd' ? 'collectd_rrd' : sprintf('spec%s_%s', preg_match('/specfp/', basename($file)) ? 'fp' : 'int', $type == 'txt' ? 'text' : $type);
+        $col = $arg == 'nostore_rrd' ? 'collectd_rrd' : sprintf('spec%s%s_%s', 
+                                                                preg_match('/_fp/', basename($file)) ? 'fp' : 'int',
+                                                                preg_match('/speed/', basename($file)) ? '_speed' : '',
+                                                                $type == 'txt' ? 'text' : $type);
         $saved = $db->saveArtifact($file, $col);
         if ($saved) print_msg(sprintf('Saved %s successfully', basename($file)), isset($args['verbose']), __FILE__, __LINE__);
         else if ($saved === NULL) print_msg(sprintf('Unable to save %s', basename($file)), isset($args['verbose']), __FILE__, __LINE__, TRUE);

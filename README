@@ -517,15 +517,23 @@ This benchmark has the following dependencies:
 TEST ARTIFACTS
 This benchmark generates the following artifacts:
 
-collectd-rrd.zip             collectd RRD files (see --collectd_rrd)
-specint2017.csv              SPECint test results in CSV format
-specint2017.html             HTML formatted SPECint test report
-specint2017.pdf              PDF formatted SPECint test report
-specint2017.txt              Text formatted SPECint test report
-specfp2017.csv               SPECfp test results in CSV format
-specfp2017.html              HTML formatted SPECfp test report
-specfp2017.pdf               PDF formatted SPECfp test report
-specfp2017.txt               Text formatted SPECfp test report
+collectd-rrd.zip                  collectd RRD files (see --collectd_rrd)
+specrate2017_int.csv              SPECint rate test results in CSV format
+specrate2017_int.html             HTML formatted SPECint rate test report
+specrate2017_int.pdf              PDF formatted SPECint rate test report
+specrate2017_int.txt              Text formatted SPECint rate test report
+specrate2017_fp.csv               SPECfp rate test results in CSV format
+specrate2017_fp.html              HTML formatted SPECfp rate test report
+specrate2017_fp.pdf               PDF formatted SPECfp rate test report
+specrate2017_fp.txt               Text formatted SPECfp rate test report
+specspeed2017_int.csv              SPECint speed test results in CSV format
+specspeed2017_int.html             HTML formatted SPECint speed test report
+specspeed2017_int.pdf              PDF formatted SPECint speed test report
+specspeed2017_int.txt              Text formatted SPECint speed test report
+specspeed2017_fp.csv               SPECfp speed test results in CSV format
+specspeed2017_fp.html              HTML formatted SPECfp speed test report
+specspeed2017_fp.pdf               PDF formatted SPECfp speed test report
+specspeed2017_fp.txt               Text formatted SPECfp speed test report
 
 
 SAVE SCHEMA
@@ -874,21 +882,29 @@ size: input data size - test, train or ref
 spec_dir
 specspeed2017_fp_peak: peak, speed floating point score (only present if rate=0 and peak=1)
 specspeed2017_fp_base: base, speed floating point score (only present if rate=0 and peak=0)
-specfp_csv: [URL to the SPECfp CSV format report (if save.sh --store option used)]
-specfp_html: [URL to the SPECfp HTML format report (if save.sh --store option used)]
-specfp_pdf: [URL to the SPECfp PDF format report (if save.sh --store option used)]
+specfp_csv: [URL to the SPECfp rate CSV format report (if save.sh --store option used)]
+specfp_html: [URL to the SPECfp rate HTML format report (if save.sh --store option used)]
+specfp_pdf: [URL to the SPECfp rate PDF format report (if save.sh --store option used)]
+specfp_speed_csv: [URL to the SPECfp speed CSV format report (if save.sh --store option used)]
+specfp_speed_html: [URL to the SPECfp speed HTML format report (if save.sh --store option used)]
+specfp_speed_pdf: [URL to the SPECfp speed PDF format report (if save.sh --store option used)]
 specrate2017_fp_peak: peak, rate floating point score (only present if rate=1 and peak=1)
 specrate2017_fp_base: base, rate floating point score (only present if rate=1 and peak=0)
-specfp_text: [URL to the SPECfp text format report (if save.sh --store option used)]
+specfp_text: [URL to the SPECfp rate text format report (if save.sh --store option used)]
+specfp_text_speed: [URL to the SPECfp speed text format report (if save.sh --store option used)]
 
 specspeed2017_int_peak: peak, speed integer score (only present if rate=0 and peak=1)
 specspeed2017_int_base: base, speed integer score (only present if rate=0 and peak=0)
-specint_csv: [URL to the SPECint CSV format report (if save.sh --store option used)]
-specint_html: [URL to the SPECint HTML format report (if save.sh --store option used)]
-specint_pdf: [URL to the SPECint PDF format report (if save.sh --store option used)]
+specint_csv: [URL to the SPECint rate CSV format report (if save.sh --store option used)]
+specint_html: [URL to the SPECint rate HTML format report (if save.sh --store option used)]
+specint_pdf: [URL to the SPECint rate PDF format report (if save.sh --store option used)]
+specint_speed_csv: [URL to the SPECint speed CSV format report (if save.sh --store option used)]
+specint_speed_html: [URL to the SPECint speed HTML format report (if save.sh --store option used)]
+specint_speed_pdf: [URL to the SPECint speed PDF format report (if save.sh --store option used)]
 specrate2017_int_peak: peak, rate integer score (only present if rate=1 and peak=1)
 specrate2017_int_base: base, rate integer score (only present if rate=1 and peak=0)
-specint_text: [URL to the SPECint text format report (if save.sh --store option used)]
+specint_text: [URL to the SPECint rate text format report (if save.sh --store option used)]
+specint_text_speed: [URL to the SPECint speed text format report (if save.sh --store option used)]
 
 sse: sse optimization used (if applicable)
 sse_max

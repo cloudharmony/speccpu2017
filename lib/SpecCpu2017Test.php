@@ -268,7 +268,7 @@ class SpecCpu2017Test {
         if ($col == 'benchmark') $col = 'benchmarks';
         $results[$col] = is_array($val) ? implode('|', $val) : $val;
       }
-      foreach(array('specint2017.csv', 'specfp2017.csv') as $csv) {
+      foreach(array('specrate2017_int.csv', 'specspeed2017_int.csv', 'specrate2017_fp.csv', 'specspeed2017_fp.csv') as $csv) {
         if (file_exists($csv = sprintf('%s/%s', $this->options['output'], $csv))) {
           print_msg(sprintf('Processing csv results file %s for %s metrics', $csv, $base ? 'base' : 'peak'), $verbose, __FILE__, __LINE__);
           // section identifier: 
@@ -728,13 +728,14 @@ class SpecCpu2017Test {
   			foreach(explode(',', $m[2][$i]) as $file) {
   				if (($file = trim($file)) && file_exists($file)) {
   				  # if (!preg_match('/CINT/', basename($file)) && !preg_match('/CFP/', basename($file))) continue;
-  				  if (!preg_match('/CPU2017/', basename($file))) continue;
-            $fp = preg_match('/fprate/', basename($file));
+  				  if (!preg_match('/CPU2017/i', basename($file))) continue;
+            $fp = preg_match('/\.fp/', basename($file));
+            $speed = preg_match('/speed/', basename($file));
             $pieces = explode('.', $file);
             $id = $pieces[1];
             $type = $pieces[count($pieces) - 1];
             if (in_array($type, array('pdf', 'csv', 'html', 'txt'))) {
-              $path = sprintf('%s/spec%s2017.%s', $this->options['output'], $fp ? 'fp' : 'int', $type);
+              $path = sprintf('%s/spec%s2017_%s.%s', $this->options['output'], $speed ? 'speed' : 'rate', $fp ? 'fp' : 'int', $type);
               exec(sprintf('mv %s %s', $file, $path));
               if (file_exists($path)) {
                 if ($type == 'csv') $moved = TRUE;
@@ -744,6 +745,7 @@ class SpecCpu2017Test {
                   $html = file_get_contents($path);
                   $html = str_replace('http://www.spec.org/includes/css/', '//cloudharmony.com/assets/cpu2017/', $html);
                   $html = str_replace('body { background-image: url(invalid.gif) }', '', $html);
+                  $html = str_replace('Invalid ', '', $html);
                   if (preg_match('/img src="(.*).gif"/', $html, $m1)) $html = str_replace($m1[1] . '.gif', sprintf('spec%s2017.gif', $fp ? 'fp' : 'int'), $html);
                   $fp = fopen($path, 'w');
                   fwrite($fp, $html);
